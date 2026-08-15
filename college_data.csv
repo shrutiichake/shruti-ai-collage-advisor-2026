@@ -1,0 +1,16 @@
+college,course,location,min_percentage,entrance_score,fees,interest,career
+Government Polytechnic Pune,Information Technology,Pune,75,70,15000,Technology,Software Developer
+Government Polytechnic Pune,Computer Engineering,Pune,78,75,15000,Technology,Software Engineer
+Government Polytechnic Pune,Artificial Intelligence,Pune,80,80,18000,AI,AI Engineer
+Government Polytechnic Nashik,Information Technology,Nashik,70,65,14000,Technology,Web Developer
+Government Polytechnic Nashik,Computer Engineering,Nashik,72,68,14000,Technology,Software Engineer
+Government Polytechnic Mumbai,Computer Engineering,Mumbai,80,80,18000,Technology,Software Engineer
+Government Polytechnic Mumbai,Information Technology,Mumbai,82,78,18000,Technology,Software Developer
+Government Polytechnic Kolhapur,Artificial Intelligence,Kolhapur,72,65,16000,AI,AI Engineer
+Government Polytechnic Kolhapur,Information Technology,Kolhapur,68,60,14000,Technology,Web Developer
+Government Polytechnic Awasari Khurd,Information Technology,Pune,65,55,12000,Technology,Software Developer
+Government Polytechnic Awasari Khurd,Computer Engineering,Pune,68,60,12000,Technology,Software Engineer
+Government Polytechnic Solapur,Information Technology,Solapur,65,55,13000,Technology,Web Developer
+Government Polytechnic Nagpur,Computer Engineering,Nagpur,75,70,15000,Technology,Software Engineer
+Government Polytechnic Aurangabad,Artificial Intelligence,Aurangabad,70,65,16000,AI,AI Engineer
+Government Polytechnic Aurangabad,Information Technology,Aurangabad,68,60,15000,Technology,Software Developer
