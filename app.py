@@ -23,8 +23,9 @@ data = pd.read_csv("college_data.csv")
 # --------------------------------
 
 st.title("🎓 AI College Advisor")
+
 st.write(
-    "Find the colleges and courses that best match your profile."
+    "Your personal AI-powered college, course and career advisor."
 )
 
 st.divider()
@@ -42,11 +43,15 @@ name = st.sidebar.text_input(
 
 education = st.sidebar.selectbox(
     "Education Level",
-    ["10th", "12th", "Diploma"]
+    [
+        "10th",
+        "12th",
+        "Diploma"
+    ]
 )
 
 percentage = st.sidebar.number_input(
-    "Percentage",
+    "Your Percentage",
     min_value=0.0,
     max_value=100.0,
     value=75.0,
@@ -58,32 +63,55 @@ entrance_score = st.sidebar.number_input(
     min_value=0.0,
     max_value=100.0,
     value=70.0,
-    step=0.1
+    step=1.0
 )
 
 budget = st.sidebar.number_input(
     "Maximum Annual Fees (₹)",
     min_value=0,
     max_value=1000000,
-    value=20000,
-    step=1000
+    value=100000,
+    step=5000
 )
 
 # --------------------------------
-# PREFERENCES
+# STREAM
 # --------------------------------
 
-st.sidebar.header("🎯 Preferences")
+st.sidebar.header("📚 Academic Preference")
+
+stream = st.sidebar.selectbox(
+    "Preferred Stream",
+    sorted(data["stream"].unique())
+)
+
+# --------------------------------
+# COURSE
+# --------------------------------
+
+available_courses = sorted(
+    data[
+        data["stream"] == stream
+    ]["course"].unique()
+)
 
 course = st.sidebar.selectbox(
     "Preferred Course",
-    sorted(data["course"].unique())
+    available_courses
 )
+
+# --------------------------------
+# LOCATION
+# --------------------------------
 
 location = st.sidebar.selectbox(
     "Preferred Location",
     sorted(data["location"].unique())
 )
+
+# --------------------------------
+# INTEREST
+# --------------------------------
 
 interest = st.sidebar.selectbox(
     "Area of Interest",
@@ -91,46 +119,46 @@ interest = st.sidebar.selectbox(
 )
 
 # --------------------------------
-# RECOMMENDATION FUNCTION
+# SCORE FUNCTION
 # --------------------------------
 
 def calculate_score(row):
 
     score = 0
 
-    # Academic percentage
-    if percentage >= row["min_percentage"]:
-        score += 25
-    else:
-        difference = row["min_percentage"] - percentage
+    # Education
+    if education == row["education"]:
+        score += 10
 
-        if difference <= 5:
-            score += 15
-        elif difference <= 10:
-            score += 8
+    # Percentage
+    if percentage >= row["min_percentage"]:
+        score += 20
+
+    elif percentage >= row["min_percentage"] - 5:
+        score += 10
 
     # Entrance score
     if entrance_score >= row["entrance_score"]:
-        score += 20
-    else:
-        difference = row["entrance_score"] - entrance_score
+        score += 15
 
-        if difference <= 5:
-            score += 12
-        elif difference <= 10:
-            score += 5
+    elif entrance_score >= row["entrance_score"] - 5:
+        score += 8
+
+    # Stream
+    if stream == row["stream"]:
+        score += 15
 
     # Course
     if course == row["course"]:
-        score += 20
+        score += 15
 
     # Location
     if location == row["location"]:
-        score += 15
+        score += 10
 
     # Budget
     if budget >= row["fees"]:
-        score += 10
+        score += 5
 
     # Interest
     if interest == row["interest"]:
@@ -140,11 +168,11 @@ def calculate_score(row):
 
 
 # --------------------------------
-# BUTTON
+# RECOMMENDATION BUTTON
 # --------------------------------
 
 if st.sidebar.button(
-    "🤖 Find Best Colleges",
+    "🤖 Get AI Recommendations",
     use_container_width=True
 ):
 
@@ -153,34 +181,32 @@ if st.sidebar.button(
 
     else:
 
-        # Calculate score
+        # Calculate scores
         data["match_score"] = data.apply(
             calculate_score,
             axis=1
         )
 
-        # Only show colleges with reasonable match
-        recommendations = data[
-            data["match_score"] >= 40
-        ].copy()
-
-        # Sort by score
-        recommendations = recommendations.sort_values(
-            by="match_score",
+        # Sort
+        recommendations = data.sort_values(
+            "match_score",
             ascending=False
-        )
+        ).copy()
+
+        # Top 10
+        recommendations = recommendations.head(10)
 
         # --------------------------------
-        # STUDENT HEADER
+        # WELCOME
         # --------------------------------
 
         st.success(
-            f"Welcome {name}! 🎓 "
+            f"Welcome {name}! 👋 "
             "Here are your personalized recommendations."
         )
 
         # --------------------------------
-        # PROFILE SUMMARY
+        # PROFILE
         # --------------------------------
 
         st.subheader("📋 Your Profile")
@@ -194,158 +220,214 @@ if st.sidebar.button(
 
         c2.metric(
             "Entrance Score",
-            f"{entrance_score}"
+            entrance_score
         )
 
         c3.metric(
             "Budget",
-            f"₹{budget}"
+            f"₹{budget:,}"
         )
 
         c4.metric(
-            "Education",
-            education
+            "Stream",
+            stream
         )
 
         st.divider()
 
         # --------------------------------
-        # RECOMMENDATIONS
+        # TOP RECOMMENDATIONS
         # --------------------------------
 
         st.subheader("🏆 Top College Recommendations")
 
-        if len(recommendations) > 0:
+        for rank, (_, college) in enumerate(
+            recommendations.iterrows(),
+            start=1
+        ):
 
-            # Top 5
-            top_colleges = recommendations.head(5)
+            score = int(college["match_score"])
 
-            for index, college in top_colleges.iterrows():
+            if score >= 80:
+                status = "🟢 Excellent Match"
 
-                score = int(college["match_score"])
+            elif score >= 60:
+                status = "🟡 Good Match"
 
-                if score >= 80:
-                    level = "🟢 Excellent Match"
+            else:
+                status = "🟠 Possible Match"
 
-                elif score >= 60:
-                    level = "🟡 Good Match"
+            st.markdown(
+                f"## #{rank} 🏫 {college['college']}"
+            )
 
-                else:
-                    level = "🟠 Possible Match"
+            col1, col2, col3 = st.columns(3)
 
-                st.markdown(
-                    f"## 🏫 {college['college']}"
+            with col1:
+
+                st.write(
+                    f"**Course:** {college['course']}"
                 )
 
-                col1, col2, col3 = st.columns(3)
-
-                with col1:
-
-                    st.write(
-                        f"**Course:** {college['course']}"
-                    )
-
-                    st.write(
-                        f"**Location:** {college['location']}"
-                    )
-
-                with col2:
-
-                    st.write(
-                        f"**Fees:** ₹{college['fees']}"
-                    )
-
-                    st.write(
-                        f"**Minimum Percentage:** "
-                        f"{college['min_percentage']}%"
-                    )
-
-                with col3:
-
-                    st.write(
-                        f"**Career:** {college['career']}"
-                    )
-
-                    st.write(
-                        f"**Match:** {score}%"
-                    )
-
-                st.progress(
-                    score / 100
+                st.write(
+                    f"**Stream:** {college['stream']}"
                 )
 
-                st.info(level)
+                st.write(
+                    f"**Location:** {college['location']}"
+                )
 
-                st.divider()
+            with col2:
 
-            # --------------------------------
-            # COMPARISON TABLE
-            # --------------------------------
+                st.write(
+                    f"**Fees:** ₹{college['fees']:,}"
+                )
 
-            st.subheader("📊 College Comparison")
+                st.write(
+                    f"**Minimum Percentage:** "
+                    f"{college['min_percentage']}%"
+                )
 
-            comparison = top_colleges[
-                [
-                    "college",
-                    "course",
-                    "location",
-                    "fees",
-                    "min_percentage",
-                    "match_score"
-                ]
-            ].copy()
+                st.write(
+                    f"**Entrance Score:** "
+                    f"{college['entrance_score']}"
+                )
 
-            comparison.columns = [
-                "College",
-                "Course",
-                "Location",
-                "Fees",
-                "Min Percentage",
-                "Match Score"
+            with col3:
+
+                st.write(
+                    f"**Career:** {college['career']}"
+                )
+
+                st.write(
+                    f"**Interest:** {college['interest']}"
+                )
+
+                st.write(
+                    f"**Match Score:** {score}%"
+                )
+
+            st.progress(
+                min(score, 100) / 100
+            )
+
+            st.info(status)
+
+            st.divider()
+
+        # --------------------------------
+        # COURSE RECOMMENDATIONS
+        # --------------------------------
+
+        st.subheader("🎯 Recommended Courses")
+
+        course_data = (
+            data.groupby(
+                "course"
+            )["match_score"]
+            .max()
+            .sort_values(
+                ascending=False
+            )
+            .head(5)
+        )
+
+        for course_name, score in course_data.items():
+
+            st.write(
+                f"**{course_name}** — "
+                f"{int(score)}% match"
+            )
+
+            st.progress(
+                min(int(score), 100) / 100
+            )
+
+        # --------------------------------
+        # CAREER RECOMMENDATIONS
+        # --------------------------------
+
+        st.subheader("💼 Career Suggestions")
+
+        careers = (
+            recommendations[
+                "career"
             ]
+            .drop_duplicates()
+            .head(5)
+            .tolist()
+        )
 
-            st.dataframe(
-                comparison,
-                use_container_width=True,
-                hide_index=True
-            )
+        for career in careers:
+            st.write(f"🚀 {career}")
 
-        else:
+        # --------------------------------
+        # COMPARISON
+        # --------------------------------
 
-            st.warning(
-                "No suitable colleges found. "
-                "Try changing your preferences."
-            )
+        st.subheader("📊 College Comparison")
+
+        comparison = recommendations[
+            [
+                "college",
+                "course",
+                "location",
+                "fees",
+                "match_score"
+            ]
+        ].copy()
+
+        comparison.columns = [
+            "College",
+            "Course",
+            "Location",
+            "Fees",
+            "Match Score"
+        ]
+
+        st.dataframe(
+            comparison,
+            use_container_width=True,
+            hide_index=True
+        )
+
+# --------------------------------
+# HOME SCREEN
+# --------------------------------
 
 else:
 
-    # --------------------------------
-    # HOME SCREEN
-    # --------------------------------
-
-    st.subheader("✨ How It Works")
+    st.subheader(
+        "✨ Find Your Best College & Career"
+    )
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("### 1️⃣ Enter Profile")
+
+        st.markdown("### 🎓 College Finder")
+
         st.write(
-            "Enter your marks, entrance score "
-            "and budget."
+            "Find colleges based on your "
+            "marks, course, location and budget."
         )
 
     with col2:
-        st.markdown("### 2️⃣ Select Preferences")
+
+        st.markdown("### 🎯 Course Advisor")
+
         st.write(
-            "Choose your preferred course, "
-            "location and interest."
+            "Explore courses from Science, "
+            "Commerce, Arts and Diploma streams."
         )
 
     with col3:
-        st.markdown("### 3️⃣ Get Recommendations")
+
+        st.markdown("### 💼 Career Advisor")
+
         st.write(
-            "Our recommendation system ranks "
-            "suitable colleges for you."
+            "Discover career options based "
+            "on your interests."
         )
 
 # --------------------------------
