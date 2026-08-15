@@ -1,16 +1,46 @@
-college,course,location,min_percentage,entrance_score,fees,interest,career
-Government Polytechnic Pune,Information Technology,Pune,75,70,15000,Technology,Software Developer
-Government Polytechnic Pune,Computer Engineering,Pune,78,75,15000,Technology,Software Engineer
-Government Polytechnic Pune,Artificial Intelligence,Pune,80,80,18000,AI,AI Engineer
-Government Polytechnic Nashik,Information Technology,Nashik,70,65,14000,Technology,Web Developer
-Government Polytechnic Nashik,Computer Engineering,Nashik,72,68,14000,Technology,Software Engineer
-Government Polytechnic Mumbai,Computer Engineering,Mumbai,80,80,18000,Technology,Software Engineer
-Government Polytechnic Mumbai,Information Technology,Mumbai,82,78,18000,Technology,Software Developer
-Government Polytechnic Kolhapur,Artificial Intelligence,Kolhapur,72,65,16000,AI,AI Engineer
-Government Polytechnic Kolhapur,Information Technology,Kolhapur,68,60,14000,Technology,Web Developer
-Government Polytechnic Awasari Khurd,Information Technology,Pune,65,55,12000,Technology,Software Developer
-Government Polytechnic Awasari Khurd,Computer Engineering,Pune,68,60,12000,Technology,Software Engineer
-Government Polytechnic Solapur,Information Technology,Solapur,65,55,13000,Technology,Web Developer
-Government Polytechnic Nagpur,Computer Engineering,Nagpur,75,70,15000,Technology,Software Engineer
-Government Polytechnic Aurangabad,Artificial Intelligence,Aurangabad,70,65,16000,AI,AI Engineer
-Government Polytechnic Aurangabad,Information Technology,Aurangabad,68,60,15000,Technology,Software Developer
+college,education,course,stream,location,min_percentage,entrance_score,fees,interest,career
+Pune Institute of Computer Technology,12th,Computer Science,Science,Pune,75,65,85000,Technology,Software Developer
+Modern College Pune,B.Sc Computer Science,Science,Pune,60,50,45000,Technology,Software Developer
+Pune University,B.Sc Data Science,Science,Pune,65,55,55000,Data Science,Data Scientist
+MIT Pune,B.Tech Artificial Intelligence,Science,Pune,80,75,180000,AI,AI Engineer
+COEP Technological University,B.Tech Computer Engineering,Science,Pune,85,80,160000,Technology,Software Engineer
+Government Polytechnic Awasari Khurd,Diploma Information Technology,Diploma,Pune,65,55,12000,Technology,Software Developer
+Government Polytechnic Pune,Diploma Computer Engineering,Diploma,Pune,70,60,15000,Technology,Software Engineer
+Government Polytechnic Mumbai,Diploma Electronics Engineering,Diploma,Mumbai,65,55,14000,Electronics,Electronics Engineer
+Government Polytechnic Nashik,Diploma Mechanical Engineering,Diploma,Nashik,60,50,13000,Mechanical,Mechanical Engineer
+Government Polytechnic Kolhapur,Diploma Civil Engineering,Diploma,Kolhapur,60,50,13000,Construction,Civil Engineer
+Pune Institute of Technology,B.Tech Information Technology,Science,Pune,75,70,140000,Technology,Software Developer
+Mumbai Engineering College,B.Tech Cyber Security,Science,Mumbai,78,72,150000,Cyber Security,Cyber Security Analyst
+Nagpur Institute of Technology,B.Tech Data Science,Science,Nagpur,75,68,130000,Data Science,Data Scientist
+Aurangabad Institute of Technology,B.Tech Robotics and Automation,Science,Aurangabad,72,65,120000,Robotics,Robotics Engineer
+Nashik Engineering College,B.Tech Electrical Engineering,Science,Nashik,70,60,110000,Electrical,Electrical Engineer
+Kolhapur Engineering College,B.Tech Civil Engineering,Science,Kolhapur,65,55,100000,Construction,Civil Engineer
+Pune Science College,B.Sc Physics,Science,Pune,55,40,35000,Science,Research Scientist
+Pune Science College,B.Sc Chemistry,Science,Pune,55,40,35000,Science,Chemist
+Pune Science College,B.Sc Biotechnology,Science,Pune,60,45,50000,Biology,Biotechnologist
+Pune College of Pharmacy,B.Pharm,Science,Pune,70,65,90000,Medical,Pharmacist
+Mumbai Institute of Medical Science,B.Sc Nursing,Science,Mumbai,65,60,75000,Medical,Nurse
+Pune Physiotherapy College,BPT,Science,Pune,60,55,80000,Medical,Physiotherapist
+Pune College of Management,BBA,Commerce,Pune,55,45,60000,Business,Business Manager
+Mumbai Business School,BMS,Commerce,Mumbai,60,50,75000,Business,Business Manager
+Pune Commerce College,B.Com,Commerce,Pune,50,40,35000,Finance,Accountant
+Pune Commerce College,B.Com Banking and Finance,Commerce,Pune,55,45,45000,Finance,Banking Professional
+Mumbai College of Commerce,B.Com,Commerce,Mumbai,55,45,50000,Finance,Accountant
+Pune Management Institute,BBA Digital Marketing,Commerce,Pune,55,45,65000,Marketing,Digital Marketing Specialist
+Pune Arts College,B.A English,Arts,Pune,50,40,30000,Arts,Content Writer
+Pune Arts College,B.A Psychology,Arts,Pune,55,45,40000,Psychology,Psychologist
+Mumbai Arts College,B.A Journalism and Mass Communication,Arts,Mumbai,55,45,50000,Media,Journalist
+Pune Arts College,B.A Economics,Arts,Pune,55,45,35000,Economics,Economist
+Pune Design Institute,B.Des,Arts,Pune,60,50,100000,Design,Designer
+Mumbai Fashion Institute,B.Des Fashion Design,Arts,Mumbai,55,45,120000,Fashion,Fashion Designer
+Pune Animation Institute,B.Des Animation and VFX,Arts,Pune,55,45,90000,Animation,Animator
+Pune Law College,LL.B,Arts,Pune,50,45,60000,Law,Lawyer
+Mumbai Law Institute,BA LL.B,Arts,Mumbai,55,50,80000,Law,Lawyer
+Pune Hotel Management Institute,BHM,Commerce,Pune,50,40,70000,Hospitality,Hotel Manager
+Pune Agriculture College,B.Sc Agriculture,Science,Pune,55,45,60000,Agriculture,Agriculture Officer
+Pune Food Technology Institute,B.Tech Food Technology,Science,Pune,60,50,90000,Food,Food Technologist
+Pune Computer Applications College,BCA,Commerce,Pune,55,45,55000,Technology,Software Developer
+Pune Computer Science College,BCS,Science,Pune,55,45,50000,Technology,Software Developer
+Pune IT College,B.Sc Information Technology,Science,Pune,55,45,50000,Technology,IT Professional
+Pune Data Science Institute,B.Sc Data Science,Science,Pune,60,50,65000,Data Science,Data Scientist
+Pune Cyber Security Institute,B.Sc Cyber Security,Science,Pune,60,50,70000,Cyber Security,Cyber Security Analyst
